@@ -1,0 +1,8 @@
+# Local archives — not published
+Graphical Chemical Engineering Modules.zip
+*.zip
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.claude/
