@@ -2,8 +2,8 @@
 Graphical Chemical Engineering Modules.zip
 *.zip
 
-# Old version — kept locally, not published
-V0/
+# Old versions — kept locally, not published (V0/, V1/, V2/ ...)
+V[0-9]*/
 
 # OS / editor cruft
 .DS_Store
