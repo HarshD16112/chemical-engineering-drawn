@@ -2,6 +2,9 @@
 Graphical Chemical Engineering Modules.zip
 *.zip
 
+# Old version — kept locally, not published
+V0/
+
 # OS / editor cruft
 .DS_Store
 Thumbs.db
