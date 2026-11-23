@@ -1,0 +1,36 @@
+<style>
+:root {
+  --color-bg: #ffffff;
+  --color-text: #16263b;
+  --color-divider: #dde4ec;
+  --color-accent: #b0552a;
+  --color-accent-100: #f8f1ec;
+  --color-accent-200: #eddbcf;
+  --color-accent-300: #d9b49c;
+  --color-accent-600: #96461f;
+  --color-accent-700: #7b3918;
+  --color-accent-800: #5e2c13;
+  --color-accent-900: #421e0d;
+  --color-neutral-100: #f6f8fa;
+  --color-neutral-200: #eaeff5;
+  --color-neutral-300: #d8e0ea;
+  --color-neutral-400: #b7c4d4;
+  --color-muted: #5c6b82;
+  --color-muted-strong: #4a5c75;
+  --font-heading: Lato, 'Barlow', system-ui, sans-serif;
+  --font-body: Barlow, system-ui, sans-serif;
+}
+html, body { height: 100%; }
+body { font-variant-numeric: tabular-nums; }
+body { margin: 0; }
+a { color: var(--color-accent); }
+a:hover { color: var(--color-accent-700); }
+input[type=range] { accent-color: var(--color-accent); }
+.katex-display { margin: 0 !important; }
+.katex-display > .katex { white-space: normal; }
+sub, sup { font-size: 0.72em; line-height: 0; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: var(--color-neutral-300); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-neutral-400); }
+::-webkit-scrollbar-track { background: transparent; }
+</style>

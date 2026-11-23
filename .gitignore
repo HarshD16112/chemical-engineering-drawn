@@ -5,6 +5,9 @@ Graphical Chemical Engineering Modules.zip
 # Old versions — kept locally, not published (V0/, V1/, V2/ ...)
 V[0-9]*/
 
+# Reassembled build artifact — regenerate with `node tools/build.mjs`
+build/
+
 # OS / editor cruft
 .DS_Store
 Thumbs.db

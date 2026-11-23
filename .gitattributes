@@ -1,0 +1,5 @@
+# Keep the readable source exactly as the build expects (LF) on every OS, so
+# `node tools/build.mjs` reproduces the deployed app byte-for-byte after a
+# fresh checkout — regardless of the platform's autocrlf setting.
+src/** text eol=lf
+tools/** text eol=lf

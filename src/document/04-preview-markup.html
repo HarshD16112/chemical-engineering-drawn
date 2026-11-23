@@ -1,0 +1,283 @@
+</helmet>
+
+
+
+<div style="min-height:100vh;height:100dvh;display:flex;flex-direction:column;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);font-size:16.5px">
+
+<header style="{{ headerStyle }}">
+<sc-if value="{{ isNarrow }}" hint-placeholder-val="{{ false }}">
+<button sc-camel-on-click="{{ toggleNav }}" aria-label="Modules" style="flex:none;display:inline-flex;flex-direction:column;justify-content:center;gap:4px;width:36px;height:34px;padding:0 8px;background:transparent;border:1px solid var(--color-divider);cursor:pointer">
+<i style="display:block;height:1.5px;background:var(--color-text)"></i><i style="display:block;height:1.5px;background:var(--color-text)"></i><i style="display:block;height:1.5px;background:var(--color-text)"></i>
+</button>
+</sc-if>
+<div sc-camel-on-click="{{ goHome }}" style="cursor:pointer;display:flex;align-items:baseline;gap:11px">
+<span style="{{ brandStyle }}">NOMOGRAPH</span>
+<span style="font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--color-accent);border:1px solid var(--color-accent);padding:1px 7px">In-browser</span>
+</div>
+<div style="margin-left:auto;display:flex;align-items:center;gap:12px">
+<input type="text" class="input" placeholder="Search modules…" value="{{ q }}" sc-camel-on-change="{{ onSearch }}" style="{{ searchStyle }}">
+<div class="seg" style="height:32px">
+<button sc-camel-on-click="{{ setSI }}" style="position:relative;display:inline-flex;align-items:center;padding:0 13px;font-size:14px;letter-spacing:0.06em;background:transparent;border:0;cursor:pointer;color:var(--color-text);font-family:var(--font-heading);font-weight:600">
+<sc-if value="{{ isSI }}" hint-placeholder-val="{{ true }}"><i style="position:absolute;inset:0;background:var(--color-accent)"></i><span style="position:relative;color:var(--color-bg)">SI</span></sc-if>
+<sc-if value="{{ isUS }}" hint-placeholder-val="{{ false }}"><span style="position:relative">SI</span></sc-if>
+</button>
+<button sc-camel-on-click="{{ setUS }}" style="position:relative;display:inline-flex;align-items:center;padding:0 13px;font-size:14px;letter-spacing:0.06em;background:transparent;border:0;border-left:1px solid var(--color-divider);cursor:pointer;color:var(--color-text);font-family:var(--font-heading);font-weight:600">
+<sc-if value="{{ isUS }}" hint-placeholder-val="{{ false }}"><i style="position:absolute;inset:0;background:var(--color-accent)"></i><span style="position:relative;color:var(--color-bg)">US</span></sc-if>
+<sc-if value="{{ isSI }}" hint-placeholder-val="{{ true }}"><span style="position:relative">US</span></sc-if>
+</button>
+</div>
+</div>
+</header>
+
+<div style="flex:1;display:flex;min-height:0;position:relative">
+
+<sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
+<div sc-camel-on-click="{{ closeNav }}" style="position:fixed;inset:0;z-index:65;background:rgba(29,31,32,0.34)"></div>
+</sc-if>
+
+<aside style="{{ asideStyle }}">
+<button sc-camel-on-click="{{ goHome }}" style="position:relative;display:block;width:100%;text-align:left;padding:6px 18px;background:transparent;border:0;cursor:pointer;font-family:var(--font-body);font-weight:600;font-size:15px;line-height:1.35;color:var(--color-text)">
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}"><i style="position:absolute;inset:0;background:var(--color-accent-100);border-left:3px solid var(--color-accent)"></i></sc-if>
+<span style="position:relative">Overview</span>
+</button>
+<sc-for list="{{ nav }}" as="s" hint-placeholder-count="7">
+<div style="margin-top:16px">
+<div style="padding:0 18px 5px;font-family:var(--font-body);font-weight:600;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-muted)">{{ s.name }}</div>
+<sc-for list="{{ s.items }}" as="it" hint-placeholder-count="4">
+<button sc-camel-on-click="{{ it.go }}" style="position:relative;display:block;width:100%;text-align:left;padding:6px 18px;background:transparent;border:0;cursor:pointer;font-family:var(--font-body);font-weight:400;font-size:15px;line-height:1.35;color:var(--color-text)">
+<sc-if value="{{ it.active }}" hint-placeholder-val="{{ false }}"><i style="position:absolute;inset:0;background:var(--color-accent-100);border-left:3px solid var(--color-accent)"></i></sc-if>
+<span style="position:relative">{{ it.name }}</span>
+</button>
+</sc-for>
+</div>
+</sc-for>
+</aside>
+
+<main style="flex:1;overflow-y:auto;min-width:0">
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<div style="{{ homePad }}">
+<div style="font-size:13px;letter-spacing:0.18em;text-transform:uppercase;color:var(--color-accent);margin-bottom:10px">Interactive reference · {{ nMod }} modules</div>
+<h1 style="{{ heroStyle }}">Chemical engineering you can see.</h1>
+<p style="max-width:62ch;font-size:18px;line-height:1.62;color:color-mix(in srgb, var(--color-text) 78%, transparent);text-wrap:pretty">Every method here is a live graphic. Move a variable and the construction redraws — the McCabe–Thiele staircase, the Levenspiel area, the Moody operating point, the psychrometric state. Each module carries its governing equations, the numbers a working engineer needs, and the standard it follows. Every number is computed in the page — no server, no round-trips.</p>
+<div style="height:36px"></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(292px,1fr));gap:26px">
+<sc-for list="{{ nav }}" as="s" hint-placeholder-count="7">
+<div class="card blueprint" style="padding:18px 18px 16px;gap:10px">
+<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+<div class="card-kicker">{{ s.count }} modules</div>
+<div class="card-title" style="font-size:22px">{{ s.name }}</div>
+<p class="card-body" style="font-size:15px;margin:0;flex:none">{{ s.blurb }}</p>
+<div style="display:flex;flex-direction:column;flex:none;margin-top:10px">
+<sc-for list="{{ s.items }}" as="it" hint-placeholder-count="4">
+<button sc-camel-on-click="{{ it.go }}" style="flex:none;text-align:left;background:transparent;border:0;border-top:1px solid var(--color-divider);padding:7px 0;cursor:pointer;font-size:15px;line-height:1.4;color:var(--color-text);display:flex;gap:8px;align-items:baseline;font-family:var(--font-body)">
+<span style="color:var(--color-accent);font-size:13px;font-family:var(--font-heading);white-space:nowrap;flex:none;min-width:34px">{{ it.num }}</span>
+<span>{{ it.name }}</span>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-for>
+</div>
+<div style="margin-top:56px">
+<div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px">
+<h2 style="font-size:28px;margin:0">Coverage audit</h2>
+<div style="font-size:14px;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent)">{{ covBuilt }} built · {{ covPart }} folded in · {{ covGap }} open of {{ covTotal }}</div>
+</div>
+<p style="max-width:70ch;font-size:15.5px;line-height:1.6;color:color-mix(in srgb, var(--color-text) 72%, transparent);margin:0 0 20px;text-wrap:pretty">The reference calculator taxonomy a process engineer expects, checked against what is built here. A <span style="color:var(--color-accent-700)">+</span> is a module of its own; “in R-06” means the method is folded into a bigger module rather than standing alone; a dash is not built yet.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(292px,1fr));gap:22px">
+<sc-for list="{{ coverage }}" as="cg" hint-placeholder-count="8">
+<div class="blueprint" style="padding:15px 16px 14px;position:relative">
+<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+<div style="font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-muted);margin-bottom:8px">{{ cg.g }}</div>
+<div style="display:flex;flex-direction:column;gap:2px">
+<sc-for list="{{ cg.items }}" as="it" hint-placeholder-count="6">
+<sc-if value="{{ it.linked }}" hint-placeholder-val="{{ true }}">
+<button sc-camel-on-click="{{ it.go }}" style="display:flex;gap:8px;align-items:baseline;width:100%;text-align:left;font-family:inherit;font-size:14px;line-height:1.4;background:transparent;border:0;border-top:1px solid var(--color-divider);padding:4px 0;cursor:pointer;color:var(--color-text)" style-hover="background:var(--color-accent-100)">
+<span style="color:var(--color-accent);font-family:var(--font-heading)">{{ it.mark }}</span>
+<span style="flex:1;text-wrap:pretty">{{ it.name }}</span>
+<span style="font-size:12.5px;letter-spacing:0.06em;font-family:var(--font-heading);color:var(--color-accent);white-space:nowrap">{{ it.ref }} →</span>
+</button>
+</sc-if>
+<sc-if value="{{ it.plain }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;gap:8px;align-items:baseline;font-size:14px;line-height:1.4;border-top:1px solid var(--color-divider);padding:4px 0">
+<span style="color:var(--color-neutral-400)">·</span>
+<span style="flex:1;text-wrap:pretty;color:color-mix(in srgb, var(--color-text) 72%, transparent)">{{ it.name }}</span>
+<span style="font-size:12.5px;letter-spacing:0.06em;font-family:var(--font-heading);color:var(--color-muted);white-space:nowrap">{{ it.ref }}</span>
+</div>
+</sc-if>
+</sc-for>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div style="margin-top:52px;padding-top:18px;border-top:1px solid var(--color-divider);font-size:14px;color:var(--color-muted);max-width:74ch;text-wrap:pretty">Correlations are drawn from open literature and public standards — IAPWS-IF97, ASHRAE psychrometrics, ISO 5167, API 610/650, TEMA, Colebrook–White, Ergun, Kremser, Turton cost correlations. Results are for study and preliminary sizing; verify against the governing standard before use in design.</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isMod }}" hint-placeholder-val="{{ false }}">
+<div style="{{ modPad }}">
+
+<div style="display:flex;align-items:baseline;gap:12px;margin-bottom:4px">
+<span style="font-size:12.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--color-accent)">{{ m.sec }}</span>
+<span style="font-size:12.5px;letter-spacing:0.16em;white-space:nowrap;color:var(--color-muted)">{{ m.num }}</span>
+</div>
+<h1 style="{{ titleStyle }}">{{ m.name }}</h1>
+<p style="max-width:78ch;font-size:16.5px;line-height:1.6;color:color-mix(in srgb, var(--color-text) 76%, transparent);margin-bottom:20px;text-wrap:pretty">{{ m.blurb }}</p>
+
+<div style="{{ bodyGap }}">
+
+<div style="display:flex;flex-direction:column;gap:26px;min-width:0;flex:1 1 470px">
+<sc-if value="{{ hasChart }}" hint-placeholder-val="{{ true }}">
+<div class="blueprint" style="padding:14px 14px 10px;position:relative">
+<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+<canvas ref="{{ canvasRef }}" style="{{ canvasStyle }}"></canvas>
+</div>
+</sc-if>
+<sc-if value="{{ hasSchem }}" hint-placeholder-val="{{ false }}">
+<div class="blueprint" style="padding:14px 14px 12px;position:relative">
+<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+<canvas ref="{{ schemRef }}" style="{{ schemStyle }}"></canvas>
+<div style="margin-top:6px;padding-top:8px;border-top:1px solid var(--color-divider);font-size:14px;line-height:1.5;color:var(--color-muted-strong);text-wrap:pretty">{{ schemNote }}</div>
+</div>
+</sc-if>
+
+<div class="blueprint" style="padding:16px 18px 14px;position:relative;background:var(--color-accent-100)">
+<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+<div style="font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-accent-800);margin-bottom:6px">How to read this</div>
+<p style="margin:0;font-size:15.5px;line-height:1.6;color:var(--color-text);max-width:88ch;text-wrap:pretty">{{ m.howto }}</p>
+</div>
+
+<sc-if value="{{ hasTable }}" hint-placeholder-val="{{ false }}">
+<div class="blueprint" style="padding:14px 16px;position:relative;overflow-x:auto">
+<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+<div style="font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-muted);margin-bottom:8px">{{ tblTitle }}</div>
+<sc-raw-table class="table">
+<sc-raw-thead><sc-raw-tr><sc-for list="{{ tblHead }}" as="h" hint-placeholder-count="4"><sc-raw-th style="white-space:nowrap">{{ h.t }}</sc-raw-th></sc-for></sc-raw-tr></sc-raw-thead>
+<sc-raw-tbody><sc-for list="{{ tblRows }}" as="row" hint-placeholder-count="4"><sc-raw-tr><sc-for list="{{ row.cells }}" as="c" hint-placeholder-count="4"><sc-raw-td style="white-space:nowrap;font-variant-numeric:tabular-nums">{{ c.t }}</sc-raw-td></sc-for></sc-raw-tr></sc-for></sc-raw-tbody>
+</sc-raw-table>
+</div>
+</sc-if>
+
+<div style="{{ eqGrid }}">
+<div class="blueprint" style="padding:14px 16px 16px;position:relative">
+<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+<div style="font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-muted);margin-bottom:9px">Governing equations</div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<sc-for list="{{ eqs }}" as="e" hint-placeholder-count="3">
+<div>
+<div style="border:1px solid var(--color-divider);background:var(--color-bg);padding:15px 18px;display:flex;align-items:center;justify-content:center;min-height:56px;overflow-x:auto;overflow-y:hidden">{{ e.n }}</div>
+<div style="font-size:13.5px;color:var(--color-muted);line-height:1.45;margin-top:7px;text-align:center">{{ e.d }}</div>
+</div>
+</sc-for>
+</div>
+</div>
+<div class="blueprint" style="padding:14px 16px 16px;position:relative">
+<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+<div style="font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-muted);margin-bottom:9px">Basis &amp; assumptions</div>
+<div style="display:flex;flex-direction:column;gap:7px">
+<sc-for list="{{ notes }}" as="n" hint-placeholder-count="3">
+<div style="font-size:15px;line-height:1.5;display:flex;gap:8px"><span style="color:var(--color-accent)">+</span><span style="text-wrap:pretty">{{ n.t }}</span></div>
+</sc-for>
+</div>
+<div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--color-divider);font-size:13.5px;letter-spacing:0.03em;color:var(--color-accent-700)">{{ m.std }}</div>
+</div>
+</div>
+
+<sc-if value="{{ hasNom }}" hint-placeholder-val="{{ true }}">
+<div class="blueprint" style="padding:15px 18px 17px;position:relative">
+<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+<div style="font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-muted);margin-bottom:9px">What every symbol means</div>
+<div style="{{ nomGrid }}">
+<sc-for list="{{ nom }}" as="s" hint-placeholder-count="8">
+<div style="display:flex;gap:11px;align-items:baseline;padding:5px 0;border-bottom:1px solid color-mix(in srgb, var(--color-divider) 55%, transparent)">
+<span style="flex:0 0 78px;text-align:right;font-size:15.5px;line-height:1.25;color:var(--color-text)">{{ s.s }}</span>
+<span style="flex:1 1 auto;min-width:0;font-size:14px;line-height:1.5;text-wrap:pretty;color:color-mix(in srgb, var(--color-text) 82%, transparent)">{{ s.d }}</span>
+</div>
+</sc-for>
+</div>
+<div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--color-divider)">
+<div style="font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-muted);margin-bottom:6px">How the equations connect</div>
+<p style="margin:0;font-size:15px;line-height:1.62;max-width:92ch;text-wrap:pretty">{{ flow }}</p>
+</div>
+</div>
+</sc-if>
+</div>
+
+<div style="{{ sideColStyle }}">
+<div class="blueprint" style="padding:15px 16px 17px;position:relative">
+<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+<div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px">
+<div style="font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-muted)">Inputs</div>
+<button sc-camel-on-click="{{ reset }}" class="btn btn-ghost" style="font-size:13px;letter-spacing:0.08em;padding:2px 6px">RESET</button>
+</div>
+<div style="display:flex;flex-direction:column;gap:13px">
+<sc-for list="{{ controls }}" as="c" hint-placeholder-count="6">
+<div>
+<div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:3px">
+<label style="font-size:14px;line-height:1.3;color:color-mix(in srgb, var(--color-text) 78%, transparent)">{{ c.label }}</label>
+<sc-if value="{{ c.isRange }}" hint-placeholder-val="{{ true }}">
+<span style="display:flex;align-items:baseline;gap:4px;flex:none">
+<input type="number" class="input" value="{{ c.disp }}" step="{{ c.dstep }}" sc-camel-on-change="{{ c.onNum }}" sc-camel-on-blur="{{ c.onNumBlur }}" style="{{ numStyle }}">
+<span style="font-size:13px;width:56px;color:var(--color-muted)">{{ c.unit }}</span>
+</span>
+</sc-if>
+</div>
+<sc-if value="{{ c.hasSlider }}" hint-placeholder-val="{{ true }}">
+<input type="range" min="{{ c.min }}" max="{{ c.max }}" step="{{ c.step }}" value="{{ c.value }}" sc-camel-on-change="{{ c.onRange }}" style="{{ sliderStyle }}">
+</sc-if>
+<sc-if value="{{ c.typeIn }}" hint-placeholder-val="{{ false }}">
+<div style="font-size:12.5px;letter-spacing:0.04em;color:var(--color-muted)">type a value · {{ c.rangeHint }}</div>
+</sc-if>
+<sc-if value="{{ c.isSelect }}" hint-placeholder-val="{{ false }}">
+<sc-raw-select class="input" value="{{ c.value }}" sc-camel-on-change="{{ c.onSel }}" style="min-height:30px;height:30px;padding:2px 6px;font-size:15px">
+<sc-for list="{{ c.options }}" as="o" hint-placeholder-count="3"><option value="{{ o.v }}">{{ o.l }}</option></sc-for>
+</sc-raw-select>
+</sc-if>
+<sc-if value="{{ c.isText }}" hint-placeholder-val="{{ false }}">
+<input type="text" class="input" value="{{ c.tval }}" placeholder="{{ c.placeholder }}" sc-camel-on-change="{{ c.onText }}" style="width:100%;min-height:30px;height:30px;padding:2px 7px;font-size:15px">
+</sc-if>
+<sc-if value="{{ c.isAction }}" hint-placeholder-val="{{ false }}">
+<button sc-camel-on-click="{{ c.onAct }}" class="btn btn-primary blueprint" style="width:100%;justify-content:flex-start;font-size:14px;letter-spacing:0.07em;min-height:32px;position:relative">
+<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>{{ c.btnLabel }}</button>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div class="blueprint" style="padding:15px 16px 12px;position:relative">
+<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+<div style="font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-muted);margin-bottom:6px">Results</div>
+<div style="display:flex;flex-direction:column;font-size:15px">
+<sc-for list="{{ results }}" as="r" hint-placeholder-count="5">
+<sc-if value="{{ r.narrow }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;align-items:baseline;gap:10px;padding:5px 0;border-top:1px solid var(--color-divider)">
+<span style="flex:1 1 auto;min-width:0;opacity:0.82;line-height:1.35;text-wrap:pretty">{{ r.l }}</span>
+<span style="flex:none;text-align:right;font-variant-numeric:tabular-nums;font-weight:500;white-space:nowrap">{{ r.v }}</span>
+<span style="flex:none;width:52px;font-size:13.5px;line-height:1.3;color:var(--color-muted)">{{ r.u }}</span>
+</div>
+</sc-if>
+<sc-if value="{{ r.wide }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:2px;padding:6px 0;border-top:1px solid var(--color-divider)">
+<span style="opacity:0.82;font-size:14px;line-height:1.3">{{ r.l }}</span>
+<span style="font-weight:500;line-height:1.35;text-wrap:pretty">{{ r.v }}</span>
+</div>
+</sc-if>
+</sc-for>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</sc-if>
+
+</main>
+</div>
+</div>
+
+
+</x-dc>

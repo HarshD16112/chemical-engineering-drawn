@@ -51,6 +51,8 @@ New tools land with each release — the version currently deployed is whatever'
 - **KaTeX** for equation rendering. **SVG** for every chart, so it stays sharp at any zoom.
 - **~2.4 MB** total. Loads instantly on the live URL and clones in seconds.
 
+**Reading the source.** The deployed `Nomograph.html` is a bundle — too big for GitHub to preview, and awkward to read. So the same application is also kept unpacked, module by module, under [`src/`](src/) — one readable file per subject area (135 tools in all). A tiny Node build (`node tools/build.mjs`) reassembles those files and checks, byte-for-byte, that they reproduce exactly what's deployed. See [`src/README.md`](src/README.md) for the map and the full tool index.
+
 ## Run it locally
 
 No tooling required:
